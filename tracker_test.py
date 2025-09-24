@@ -1,7 +1,7 @@
 import cv2
 import time
 
-# Выбери тип трекера
+
 def create_tracker(tracker_type):
     if tracker_type == 'CSRT':
         return cv2.TrackerCSRT.create()
@@ -48,8 +48,11 @@ while True:
         break
     frame = cv2.resize(frame, (1024, 576))
 
-    if cv2.waitKey(1) & 0xFF == ord("n"):
+    key = cv2.waitKey(1) & 0xFF
+    if key == ord("n"):
         tracker, bbox = reinitialize_tracker(frame)
+    if key == ord('q'):
+        break
 
     success, bbox = tracker.update(frame)
 
@@ -70,9 +73,6 @@ while True:
     cv2.setWindowTitle(tracker_name, window_title)
     
     cv2.imshow(tracker_name, frame)
-
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
 
 
 cap.release()
