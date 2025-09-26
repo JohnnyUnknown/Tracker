@@ -209,7 +209,7 @@ while True:
     window_title = f"{tracker_name} - FPS: {fps_process:.2f}"
     cv2.setWindowTitle(tracker_name, window_title)
 
-    # if tracking_initialized:
+    if not tracking_initialized: time.sleep(0.1)
     cv2.imshow(tracker_name, frame)
 
 cap.release()
